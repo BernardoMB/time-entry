@@ -7,10 +7,6 @@ npm-debug.log*
 playwright-profile/
 *.trace.zip
 
-# Generated course output (remove these lines if you want to commit the results)
-output/*
-!output/.gitkeep
-
 # Claude Code local-only settings
 .claude/settings.local.json
 

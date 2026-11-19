@@ -22,9 +22,17 @@ Markdown file.
    winget install OpenJS.NodeJS.LTS
    ```
    Restart the terminal / Claude app afterwards so `npx` is on the PATH.
-2. **A browser.** The config uses **Microsoft Edge** (`--browser msedge`), which ships with Windows.
-   To use another browser, change `--browser` in `.mcp.json` to `chrome`, `firefox`, `webkit` or
-   `chromium` (the last three need `npx playwright install <browser>` first).
+2. **Microsoft Edge with the Playwright extension.** The server runs with `--extension`, so instead
+   of launching its own browser it attaches to **your already-open Edge window**, with your
+   existing tabs, cookies and logins.
+   1. In Edge, open `edge://extensions` and turn on **Allow extensions from other stores**.
+   2. Install the **Playwright Extension** from the Chrome Web Store:
+      <https://chromewebstore.google.com/detail/playwright-extension/mmlmfjhmonkocbjadbfplnigmagldckm>
+   3. Pin it to the toolbar so you can see when it's connected.
+
+   The tabs the agent controls are grouped in a tab group named **Claude**; your other tabs are
+   left alone. The first time the agent connects, the extension asks you to approve the
+   connection — click **Allow** (or choose which tab to share).
 
 ## Setup
 
@@ -45,19 +53,22 @@ or just ask in plain words:
 > Use Playwright MCP Server to open the browser, navigate to https://example.com/my-course,
 > navigate through the course and make a markdown file writing the content of all the slides.
 
-The agent opens a visible Edge window, steps through each slide, and writes
+Keep Edge open while it runs. The agent works in your Edge window, steps through each slide, and writes
 `output/<course-slug>/course.md` (with images in `output/<course-slug>/images/`).
 
 ### Courses that need a login
 
-The browser uses a persistent profile in `./playwright-profile`, so you only need to sign in once.
-When the agent reaches a login page it will pause and ask you to sign in yourself in the opened
-browser window, then continue.
+Because the agent uses your own Edge session, just sign in to the course in Edge beforehand (or
+when the agent pauses at a login page and asks you to), then tell it to continue.
 
 ## Configuration notes
 
 - **Windows:** `npx` is wrapped with `cmd /c` in `.mcp.json`, which is required on native Windows.
   On macOS/Linux, change `"command"` to `"npx"` and drop the `"/c", "npx"` args.
-- **Headless mode:** add `"--headless"` to the args in `.mcp.json` if you don't want to see the browser.
+- **Edge profile:** by default it connects to the last-used Edge profile that has the extension.
+  To pick one, add `"--profile-dir-name", "Profile 1"` to the args.
+- **Separate browser instead:** to have Playwright launch its own Edge window (with a saved profile
+  instead of your session), replace `"--extension"` in `.mcp.json` with
+  `"--user-data-dir", "./playwright-profile"`. Add `"--headless"` to hide that window.
 - **Screenshots/traces** from the MCP server are written to `./.playwright-mcp` (git-ignored).
-- To commit generated courses, remove the `output/*` lines from `.gitignore`.
+- Generated courses in `output/` are tracked in git.

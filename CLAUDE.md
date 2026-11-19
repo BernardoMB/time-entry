@@ -8,8 +8,12 @@ using the **Playwright MCP server** (configured in `.mcp.json`, tools named `mcp
 - Always use the Playwright MCP tools (`browser_navigate`, `browser_snapshot`, `browser_click`,
   `browser_take_screenshot`, `browser_evaluate`, `browser_wait_for`, ...) for the course site.
   Do not use other browsers or web-fetch tools for it.
-- The browser profile is persistent (`./playwright-profile`), so a login done once is remembered.
-  If the course needs a login, **stop and ask the user to sign in in the opened browser window**.
+- The server runs with `--extension`: it controls the user's own, already-open Edge window (their
+  real profile, cookies and logins). Only work in the tabs you open for the course; never close,
+  read or change the user's other tabs. Do not open unrelated sites.
+- If the tools fail to connect, ask the user to make sure Edge is open, the Playwright extension is
+  installed and enabled, and to approve the connection in the extension.
+- If the course needs a login, **stop and ask the user to sign in themselves in Edge**.
   Never type passwords yourself.
 - Prefer `browser_snapshot` (accessibility tree) to read text; use screenshots only to understand
   layout or images.

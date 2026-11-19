@@ -8,14 +8,13 @@
         "npx",
         "-y",
         "@playwright/mcp@0.0.86",
+        "--extension",
         "--browser",
         "msedge",
-        "--user-data-dir",
-        "./playwright-profile",
+        "--session-name",
+        "Claude",
         "--output-dir",
-        "./.playwright-mcp",
-        "--viewport-size",
-        "1440,900"
+        "./.playwright-mcp"
       ]
     }
   }
