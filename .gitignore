@@ -20,3 +20,6 @@ desktop.ini
 # Env / secrets
 .env
 .env.*
+
+# Personal timesheets (not for the public repo)
+timesheets/
