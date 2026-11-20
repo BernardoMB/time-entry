@@ -93,7 +93,7 @@ Allocation decisions
     check-ins, and other meetings about the work under development → "Nebula - Application Development"
   - Any event with "Onboarding" in the title → "Nebula - Preliminary Project"
   - All remaining unscheduled 8:00–4:00 time → "Nebula - Preliminary Project",
-    description "Onboarding process (unscheduled time)"
+    description exactly "Onboarding process" (no suffix such as "(unscheduled time)")
   - Manager 1:1s, department/company meetings, company trainings, recruiting → "General Admin"
   - Holidays, vacation, sick or out-of-office days → "PTO" (8.0 h for a full day off)
   - If an event doesn't clearly fit, or a new project name appears, ask me before writing the file.
@@ -101,7 +101,8 @@ Allocation decisions
 CSV format (PMDB Blue "Timesheet Example")
 - Columns exactly: User,Date,Project,Hours,Description
 - User: my name exactly as PMDB Blue shows it in the top bar, written "Last, First".
-- Date: M/D/YYYY. Hours: decimals in 0.1 increments. Description: the event title.
+- Date: M/D/YYYY. Hours: decimals in 0.1 increments. Description: the event title as-is, or
+  "Onboarding process" for unscheduled time; never append notes or qualifiers in parentheses.
 - Project: exact PMDB dropdown name without curly braces. Before writing, open PMDB Blue in Edge
   with Playwright (I'll sign in myself if needed), go to Software Development → Time Sheet and
   confirm the names exist in the page's hidden "Projects" list. Don't save or submit anything there.
